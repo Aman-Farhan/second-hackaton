@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini Social</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-state-500 text-slate-800 min-h-screen">
+
+  <header class="bg-white shadow sticky top-0 z-20">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-2xl font-extrabold">Social Media App</h1>
+      <div class="flex items-center space-x-3">
+        <a href="" class="text-sm text-sky-600 underline" title="Project spec (uploaded)">
+          Project Spec PDF
+        </a>
+        <div id="loggedArea" class="flex items-center space-x-3">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6">
+
+    <section id="authSection" class="bg-white rounded-lg shadow p-6 mb-6">
+      <div id="authTabs" class="flex gap-2">
+        <button id="tabLogin" class="px-4 py-2 rounded-md bg-sky-600 text-white">Login</button>
+        <button id="tabSignup" class="px-4 py-2 rounded-md bg-slate-100">Signup</button>
+      </div>
+
+      <div id="loginForm" class="mt-4">
+        <input id="loginEmail" class="w-full p-3 border rounded mb-3" placeholder="Email" />
+        <input id="loginPassword" type="password" class="w-full p-3 border rounded mb-3" placeholder="Password" />
+        <div class="flex justify-between items-center">
+          <button id="doLogin" class="px-4 py-2 bg-sky-600 text-white rounded">Login</button>
+          <small class="text-sm text-slate-500">Demo only — no backend</small>
+        </div>
+      </div>
+
+      <div id="signupForm" class="mt-4 hidden">
+        <input id="signupName" class="w-full p-3 border rounded mb-3" placeholder="Full name" />
+        <input id="signupEmail" class="w-full p-3 border rounded mb-3" placeholder="Email" />
+        <input id="signupPassword" type="password" class="w-full p-3 border rounded mb-3" placeholder="Password" />
+        <label class="block text-sm mb-2">Upload profile picture (small)</label>
+        <input id="signupPic" type="file" accept="image/*" class="mb-3" />
+        <div class="flex justify-between items-center">
+          <button id="doSignup" class="px-4 py-2 bg-green-600 text-white rounded">Create account</button>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="createPost" class="bg-white rounded-lg shadow p-6 mb-6 hidden">
+      <div class="flex items-start space-x-3">
+        <img id="composerAvatar" src="" alt="me" class="w-14 h-14 rounded-full object-cover" />
+        <div class="flex-1">
+          <textarea id="postText" class="w-full p-3 border rounded mb-3" rows="3" placeholder="Kya soch rahe ho? (text + optional image)"></textarea>
+          <div class="flex items-center gap-3">
+            <input id="postImage" type="file" accept="image/*" />
+            <button id="btnPost" class="px-4 py-2 bg-sky-600 text-white rounded">Post</button>
+            <select id="sortSelect" class="ml-auto p-2 border rounded">
+              <option value="latest">Latest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="mostLiked">Most liked</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="mb-4">
+      <input id="searchInput" class="w-full p-3 border rounded" placeholder="Search posts..." />
+    </div>
+
+    <section id="feed" class="space-y-4"></section>
+
+  </main>
+
+  <template id="postTpl">
+    <article class="bg-white rounded-lg shadow p-4">
+      <div class="flex items-start gap-3">
+        <img class="w-12 h-12 rounded-full object-cover authorAvatar" />
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="font-semibold authorName"></div>
+              <div class="text-xs text-slate-500 postTime"></div>
+            </div>
+            <div class="space-x-2">
+              <button class="text-sm editBtn hidden">Edit</button>
+              <button class="text-sm deleteBtn">Delete</button>
+            </div>
+          </div>
+
+          <p class="mt-2 postText"></p>
+          <img class="mt-3 postImage rounded max-h-80 object-contain hidden" />
+
+          <div class="mt-3 flex items-center gap-4">
+            <button class="likeBtn flex items-center gap-2">
+            <span class="likeIcon">♥️</span> <span class="likeCount">0</span>
+            </button>
+
+            <button class="commentToggleBtn">Comments (<span class="commentCount">0</span>)</button>
+
+            <button class="shareBtn">Share</button>
+          </div>
+
+          <div class="commentsArea mt-3 hidden">
+            <div class="existingComments space-y-2"></div>
+            <div class="mt-2 flex items-start gap-2">
+              <img class="w-8 h-8 rounded-full composerMiniAvatar" />
+              <input class="newCommentInput flex-1 p-2 border rounded" placeholder="Write a comment..." />
+              <button class="addCommentBtn px-3 py-1 bg-sky-600 text-white rounded">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
